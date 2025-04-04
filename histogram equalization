@@ -1,0 +1,7 @@
+1.	clc; clear all; close all;
+2.	A=imread('/MATLAB Drive/penguins.jpg'); I=rgb2gray(A); subplot(2,2,1); imshow(I);
+3.	title('original image'); subplot(2,2,2); imhist(I);
+4.	title('before equalization'); subplot(2,2,3);
+5.	histeq(I); title('equalized image'); subplot(2,2,4);
+6.	plot(I);
+7.	title('after equalization');
