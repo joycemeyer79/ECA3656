@@ -1,0 +1,15 @@
+clc; clear; close all;
+%% Load the CT Scan Image
+im = imread('/MATLAB Drive/ct images.jpeg'); % Replace with actual CT scan image
+if size(im,3) == 3
+    im = rgb2gray(im); % Convert to grayscale if the image is RGB
+end
+%% Define Number of Gray Levels for Quantization
+N = 16; % Change this value as needed (e.g., 16, 32, 64)
+%% Perform Uniform Quantization
+im_q = floor(double(im) / (256/N)) * (256/N); % Uniform Quantization Formula
+im_q = uint8(im_q); % Convert back to uint8
+%% Display Original and Quantized Images
+figure;
+subplot(1,2,1), imshow(im), title('Original CT Scan');
+subplot(1,2,2), imshow(im_q), title(['Quantized Image with ', num2str(N), ' Gray Levels']);
