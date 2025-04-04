@@ -1,0 +1,15 @@
+2. clc; clear; close all;
+%% Load the Grayscale X-ray Image
+ima = imread('xray_hand.png'); % Replace with actual image file
+if size(ima,3) == 3
+    ima = rgb2gray(ima); % Convert to grayscale if it's an RGB image
+end
+%% Define the Gray Level Threshold
+N = 226;  % Set threshold to 226 gray levels
+%% Perform Quantization
+im_r = floor(double(ima) / (256/N)) * (256/N); % Uniform Quantization Formula
+im_r = uint8(im_r); % Convert back to uint8
+%% Display the Original and Quantized Images
+figure;
+subplot(1,2,1), imshow(ima), title('Original X-ray Image');
+subplot(1,2,2), imshow(im_r), title(['Quantized Image with ', num2str(N), ' Gray Levels']);
