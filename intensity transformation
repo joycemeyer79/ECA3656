@@ -1,0 +1,30 @@
+clc; clear all; close all;
+% Read and display the original image
+I = imread('tire.tif'); 
+figure;
+% Original image
+subplot(3, 2, 1); 
+imshow(I); 
+title('Original Image');
+% Negative transformation
+J = 255 - I; % Corrected formula
+subplot(3, 2, 2); 
+imshow(J); 
+title('Negative Transformation');
+% Convert image to double precision for log transformation
+I2 = im2double(I);
+% Log transformations with different scaling factors
+K1 = 1 * log(1 + I2); 
+K2 = 2 * log(1 + I2); 
+K3 = 5 * log(1 + I2);
+% Display log transformations
+subplot(3, 2, 3); 
+imshow(K1, []); % [] normalizes the image for proper display
+title('Log Transformation (c=1)');
+subplot(3, 2, 4); 
+imshow(K2, []); 
+title('Log Transformation (c=2)');
+subplot(3, 2, 5); 
+imshow(K3, []); 
+title('Log Transformation (c=5)');
+
