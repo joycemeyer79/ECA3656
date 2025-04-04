@@ -1,0 +1,45 @@
+clc; clear all; close all;
+
+% Read the image
+a = imread('pout.tif'); 
+subplot(3, 3, 1); 
+imshow(a); 
+title('Given Image');
+
+% Apply FFT
+y = fft2(a); 
+subplot(3, 3, 2); 
+imshow(log(1 + abs(y)), []); % Display the magnitude spectrum
+title('FFT of the Given Image');
+
+% Shift the zero frequency component to the center
+z = fftshift(y); 
+subplot(3, 3, 3); 
+imshow(log(1 + abs(z)), []); % Display the shifted magnitude spectrum
+title('FFT with the Shifted Origin');
+
+% Shift the origin back to the original position
+m = ifftshift(z); 
+subplot(3, 3, 4); 
+imshow(log(1 + abs(m)), []); 
+title('FFT Reshifted to the Original Position');
+
+% Apply inverse FFT
+n = ifft2(m); 
+n1 = uint8(abs(n)); % Take the magnitude and convert to uint8
+subplot(3, 3, 5); 
+imshow(n1); 
+title('Inverse FFT of the Given Image');
+
+% Discrete Cosine Transformation (DCT)
+b = dct2(double(a)); 
+subplot(3, 3, 6); 
+imshow(log(1 + abs(b)), []); % Log scale for better visualization
+title('DCT of the Given Image');
+
+% Inverse DCT
+c = idct2(b); 
+c1 = uint8(c); 
+subplot(3, 3, 7); 
+imshow(c1); 
+title('Inverse DCT of the Given Image');
